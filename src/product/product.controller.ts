@@ -5,7 +5,7 @@ import { FindProductDto } from "./dto/find-product.dto";
 @Controller("product")
 export class ProductController {
   @Post("create")
-  async create(@Body dto: Omit<ProductModel, "_id">) {}
+  async create(@Body() dto: Omit<ProductModel, "_id">) {}
 
   @Get(":id")
   async get(@Param("id") id: string) {}
@@ -18,5 +18,5 @@ export class ProductController {
 
   @HttpCode(200)
   @Post("find")
-  async find(@Body dto: FindProductDto) {}
+  async find(@Body() dto: FindProductDto) {}
 }

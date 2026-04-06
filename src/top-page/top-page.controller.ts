@@ -8,7 +8,7 @@ export class TopPageController {
   constructor(private readonly configService: ConfigService) {}
 
   @Post("create")
-  async create(@Body dto: Omit<TopPageModel, "_id">) {}
+  async create(@Body() dto: Omit<TopPageModel, "_id">) {}
 
   @Get(":id")
   async get(@Param("id") id: string) {
@@ -23,5 +23,5 @@ export class TopPageController {
 
   @HttpCode(200)
   @Post("find")
-  async find(@Body dto: FindTopPageDto) {}
+  async find(@Body() dto: FindTopPageDto) {}
 }
