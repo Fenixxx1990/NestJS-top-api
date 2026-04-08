@@ -12,7 +12,7 @@ import { getMongoConfig } from "./configs/mongo.config";
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // теперь должно работать
+      isGlobal: true,
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
