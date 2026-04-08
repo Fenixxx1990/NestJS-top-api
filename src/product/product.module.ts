@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ProductController } from "./product.controller";
-import { MongooseModule } from "node_modules/@nestjs/mongoose/dist";
+import { MongooseModule } from "@nestjs/mongoose/dist";
 import { ProductModel, ProductSchema } from "./product.model";
 
 @Module({

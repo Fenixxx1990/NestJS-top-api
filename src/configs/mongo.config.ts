@@ -1,5 +1,5 @@
 import type { ConfigService } from "@nestjs/config";
-import type { MongooseModuleFactoryOptions } from "node_modules/@nestjs/mongoose/dist";
+import type { MongooseModuleFactoryOptions } from "@nestjs/mongoose/dist";
 
 export const getMongoConfig = (configService: ConfigService): MongooseModuleFactoryOptions => {
   return {
