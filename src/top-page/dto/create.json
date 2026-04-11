@@ -1,0 +1,22 @@
+{
+  "firstCategory": 1,
+  "secondCategory": "Разработка",
+  "title": "typescript",
+  "alias": "Курсы по TypeScript",
+  "category": "typescript",
+  "hh": {
+    "count": 1000,
+    "juniorSalary": 1200000,
+    "middleSalary": 220000,
+    "seniorSalary": 350000
+  },
+  "advantages": [
+    {
+      "title": "Скорость разработки",
+      "description": "Быстрая разработка"
+    }
+  ],
+  "seoText": "тест",
+  "tagsTitle": "Полученные знания",
+  "tags": ["TypeScript"]
+}
