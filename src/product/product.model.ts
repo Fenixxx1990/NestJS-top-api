@@ -23,10 +23,10 @@ export class ProductModel {
   price: number;
 
   @Prop()
-  oldPrice: number;
+  credit: number;
 
   @Prop()
-  calculatedRating: number;
+  oldPrice?: number;
 
   @Prop()
   description: string;
@@ -35,7 +35,7 @@ export class ProductModel {
   advantages: string;
 
   @Prop()
-  disadvantages: string;
+  disAdvantages: string;
 
   @Prop({ type: () => [String] })
   categories: string[];

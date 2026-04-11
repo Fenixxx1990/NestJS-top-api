@@ -14,6 +14,7 @@ import {
 import { CreateReviewDto } from "./dto/create-review.dto";
 import { ReviewService } from "./review.service";
 import { JwtAuthGuard } from "@/auth/guards/jwt.guard";
+import { IdValidationPipe } from "@/pipes/id-validation.pipe";
 
 @Controller("review")
 export class ReviewController {
@@ -27,7 +28,7 @@ export class ReviewController {
 
   @UseGuards(JwtAuthGuard)
   @Delete(":id")
-  async delete(@Param("id") id: string) {
+  async delete(@Param("id", IdValidationPipe) id: string) {
     const deletedDoc = await this.reviewService.delete(id);
     if (!deletedDoc) {
       throw new HttpException("Отзыв с таким id не найден", HttpStatus.NOT_FOUND);
@@ -35,7 +36,7 @@ export class ReviewController {
   }
 
   @Get("byProduct/:productId")
-  async byProduct(@Param("productId") productId: string) {
+  async byProduct(@Param("productId", IdValidationPipe) productId: string) {
     return this.reviewService.findByProductId(productId);
   }
 }
