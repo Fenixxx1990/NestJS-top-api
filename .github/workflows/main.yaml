@@ -17,4 +17,4 @@ jobs:
           name: fenixxx1990/nestjs-top-api
           username: ${{ github.actor }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "developer"
+          tags: "develop"
