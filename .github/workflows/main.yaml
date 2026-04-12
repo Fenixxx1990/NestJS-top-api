@@ -2,35 +2,48 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: [master]
+    branches: [main, master] # триггер на пуш в main или master
+  pull_request:
+    branches: [main, master] # дополнительно: сборка при PR в main/master
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     permissions:
       contents: read
-      packages: write
+      packages: write # необходимо для публикации в GHCR
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3 # исправлено: v3 вместо v5
+        uses: docker/setup-buildx-action@v3
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/nest-api
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4 # убедитесь, что версия существует
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/kreomanser/nest-api:develop
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
